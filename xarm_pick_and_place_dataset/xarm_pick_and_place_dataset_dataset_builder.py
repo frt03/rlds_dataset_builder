@@ -124,30 +124,29 @@ class XArmPickAndPlaceDataset(tfds.core.GeneratorBasedBuilder):
 
             # assemble episode --> here we're assuming demos so we set reward to 1 at the end
             episode = []
-            for epi in data:
-                lang = epi['language_instruction']
-                for i, (action, jt, js, eep, image, image2, hand) in enumerate(zip(epi['action'], epi['joint_trajectory'], epi['joint_state'], epi['end_effector_pose'], epi['image'], epi['image2'], epi['hand_image'])):
-                    # compute Kona language embedding
-                    language_embedding = self._embed([lang])[0].numpy()
+            lang = data['language_instruction']
+            for i, (action, jt, js, eep, image, image2, hand) in enumerate(zip(data['action'], data['joint_trajectory'], data['joint_state'], data['end_effector_pose'], data['image'], data['image2'], data['hand_image'])):
+                # compute Kona language embedding
+                language_embedding = self._embed([lang])[0].numpy()
 
-                    episode.append({
-                        'observation': {
-                            'image': image,
-                            'image2': image2,
-                            'hand_image': hand,
-                            'joint_trajectory': jt,
-                            'joint_state': js,
-                            'end_effector_pose': eep,
-                        },
-                        'action': action,
-                        'discount': 1.0,
-                        'reward': float(i == (len(data) - 1)),
-                        'is_first': i == 0,
-                        'is_last': i == (len(data) - 1),
-                        'is_terminal': i == (len(data) - 1),
-                        'language_instruction': lang,
-                        'language_embedding': language_embedding,
-                    })
+                episode.append({
+                    'observation': {
+                        'image': image,
+                        'image2': image2,
+                        'hand_image': hand,
+                        'joint_trajectory': jt,
+                        'joint_state': js,
+                        'end_effector_pose': eep,
+                    },
+                    'action': action,
+                    'discount': 1.0,
+                    'reward': float(i == (len(data) - 1)),
+                    'is_first': i == 0,
+                    'is_last': i == (len(data) - 1),
+                    'is_terminal': i == (len(data) - 1),
+                    'language_instruction': lang,
+                    'language_embedding': language_embedding,
+                })
 
             # create output data sample
             sample = {

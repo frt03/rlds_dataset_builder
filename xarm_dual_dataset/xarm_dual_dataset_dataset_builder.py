@@ -122,29 +122,28 @@ class XArmDualDataset(tfds.core.GeneratorBasedBuilder):
 
             # assemble episode --> here we're assuming demos so we set reward to 1 at the end
             episode = []
-            for epi in data:
-                lang = epi['language_instruction']
-                for i, (action, pose_l, pose_r, action_l, action_r, image) in enumerate(zip(epi['action'], epi['pose_l'], epi['pose_r'], epi['action_l'], epi['action_r'], epi['image'])):
-                    # compute Kona language embedding
-                    language_embedding = self._embed([lang])[0].numpy()
+            lang = data['language_instruction']
+            for i, (action, pose_l, pose_r, action_l, action_r, image) in enumerate(zip(data['action'], data['pose_l'], data['pose_r'], data['action_l'], data['action_r'], data['image'])):
+                # compute Kona language embedding
+                language_embedding = self._embed([lang])[0].numpy()
 
-                    episode.append({
-                        'observation': {
-                            'image': image,
-                            'pose_l': pose_l,
-                            'pose_r': pose_r,
-                            'action_l': action_l,
-                            'action_r': action_r,
-                        },
-                        'action': action,
-                        'discount': 1.0,
-                        'reward': float(i == (len(data) - 1)),
-                        'is_first': i == 0,
-                        'is_last': i == (len(data) - 1),
-                        'is_terminal': i == (len(data) - 1),
-                        'language_instruction': lang,
-                        'language_embedding': language_embedding,
-                    })
+                episode.append({
+                    'observation': {
+                        'image': image,
+                        'pose_l': pose_l,
+                        'pose_r': pose_r,
+                        'action_l': action_l,
+                        'action_r': action_r,
+                    },
+                    'action': action,
+                    'discount': 1.0,
+                    'reward': float(i == (len(data) - 1)),
+                    'is_first': i == 0,
+                    'is_last': i == (len(data) - 1),
+                    'is_terminal': i == (len(data) - 1),
+                    'language_instruction': lang,
+                    'language_embedding': language_embedding,
+                })
 
             # create output data sample
             sample = {
