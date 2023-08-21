@@ -51,7 +51,7 @@ for i, episode in enumerate(ds.take(5)):
 
 # visualize action and state statistics
 # actions, states = [], []
-actions = [], []
+actions = []
 for episode in tqdm.tqdm(ds.take(500)):
     for step in episode['steps']:
         actions.append(step['action'].numpy())
