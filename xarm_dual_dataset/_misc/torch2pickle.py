@@ -72,7 +72,7 @@ if __name__ == '__main__':
 
     with open(dataset_path, 'rb') as f:
         data = pickle.load(f)
-    assert len(data) == 32
+    assert len(data) == 38
 
     for episode in tqdm(data):
         if episode_counter - 32 < dataset_split['reach']['train']['length']:
