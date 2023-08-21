@@ -9,7 +9,9 @@ import matplotlib.pyplot as plt
 import wandb
 
 
-WANDB_ENTITY = None
+# WANDB_ENTITY = None
+# TODO: use your own account
+WANDB_ENTITY = 'frt03'
 WANDB_PROJECT = 'vis_rlds'
 
 
@@ -78,5 +80,3 @@ vis_stats(states, state_mean, 'state_stats')
 
 if not render_wandb:
     plt.show()
-
-

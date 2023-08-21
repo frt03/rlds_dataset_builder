@@ -1,0 +1,1 @@
+This directory includes the scripts that convert internal data into RLDS-friendly format. This can be omitted at the dataset release.
