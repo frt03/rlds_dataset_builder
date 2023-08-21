@@ -86,8 +86,8 @@ if __name__ == '__main__':
         episode_dict['image'] = episode['images'].numpy().astype(np.uint8)
         episode_dict['pose_l'] = episode['pose_l'].numpy()
         episode_dict['pose_r'] = episode['pose_r'].numpy()
-        episode_dict['action_l'] = episode['action_l'].numpy()
-        episode_dict['action_r'] = episode['action_r'].numpy()
+        episode_dict['action_l'] = episode['actions_l'].numpy()
+        episode_dict['action_r'] = episode['actions_r'].numpy()
         episode_dict['action'] = np.concatenate(
             [episode_dict['action_l'], episode_dict['action_r']], axis=1
         )
