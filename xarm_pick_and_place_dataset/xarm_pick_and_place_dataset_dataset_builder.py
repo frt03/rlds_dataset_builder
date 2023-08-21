@@ -125,7 +125,8 @@ class XArmPickAndPlaceDataset(tfds.core.GeneratorBasedBuilder):
             # assemble episode --> here we're assuming demos so we set reward to 1 at the end
             episode = []
             for epi in data:
-                for i, (action, jt, js, eep, image, image2, hand, lang) in enumerate(zip(epi['action'], epi['joint_trajectory'], epi['joint_state'], epi['end_effector_pose'], epi['image'], epi['image2'], epi['hand_image'], epi['language_instruction'])):
+                lang = epi['language_instruction']
+                for i, (action, jt, js, eep, image, image2, hand) in enumerate(zip(epi['action'], epi['joint_trajectory'], epi['joint_state'], epi['end_effector_pose'], epi['image'], epi['image2'], epi['hand_image'])):
                     # compute Kona language embedding
                     language_embedding = self._embed([lang])[0].numpy()
 

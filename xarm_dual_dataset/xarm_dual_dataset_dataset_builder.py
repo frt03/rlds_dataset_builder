@@ -123,7 +123,8 @@ class XArmDualDataset(tfds.core.GeneratorBasedBuilder):
             # assemble episode --> here we're assuming demos so we set reward to 1 at the end
             episode = []
             for epi in data:
-                for i, (action, pose_l, pose_r, action_l, action_r, image, lang) in enumerate(zip(epi['action'], epi['pose_l'], epi['pose_r'], epi['action_l'], epi['action_r'], epi['image'], epi['language_instruction'])):
+                lang = epi['language_instruction']
+                for i, (action, pose_l, pose_r, action_l, action_r, image) in enumerate(zip(epi['action'], epi['pose_l'], epi['pose_r'], epi['action_l'], epi['action_r'], epi['image'])):
                     # compute Kona language embedding
                     language_embedding = self._embed([lang])[0].numpy()
 
