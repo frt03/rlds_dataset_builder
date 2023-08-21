@@ -8,7 +8,7 @@ import tensorflow_hub as hub
 import pickle
 
 
-class XArmPickAndPlaceDataset(tfds.core.GeneratorBasedBuilder):
+class XarmPickAndPlaceDataset(tfds.core.GeneratorBasedBuilder):
     """DatasetBuilder for xarm_pick_and_place dataset."""
 
     VERSION = tfds.core.Version('1.0.0')

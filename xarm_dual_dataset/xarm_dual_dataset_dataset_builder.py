@@ -8,7 +8,7 @@ import tensorflow_hub as hub
 import pickle
 
 
-class XArmDualDataset(tfds.core.GeneratorBasedBuilder):
+class XarmDualDataset(tfds.core.GeneratorBasedBuilder):
     """DatasetBuilder for xarm_dual dataset."""
 
     VERSION = tfds.core.Version('1.0.0')
